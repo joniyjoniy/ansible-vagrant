@@ -1,0 +1,48 @@
+---
+- name: exist check
+  shell: test -e /usr/local/src/emacs
+  register: exist_check
+  ignore_errors: yes
+
+- name: lib install
+  command: sudo apt-get install -y libncurses5-dev
+  when: exist_check|failed
+
+- name: source check
+  shell: test -e /tmp/emacs-24.5.tar.gz
+  register: source_check
+
+- name: emacs source download
+  command: >
+    chdir=/tmp/
+    curl -O http://core.ring.gr.jp/pub/GNU/emacs/emacs-24.5.tar.gz
+  when: source_check|failed
+
+- name: unarchive check
+  shell: test -e /tmp/emacs-24.5
+  register: unarchive_check
+  ignore_errors: yes
+  
+- name: emacs unarchive
+  command: >
+    tar -zxf emacs-24.5.tar.gz
+    chdir=/tmp/
+  when: unarchive_check|failed
+
+- name: configure
+  command: >
+    ./configure
+    chdir=/tmp/emacs-24.5
+  when: exist_check|failed
+
+- name: make
+  command: >
+    make
+    chdir=/tmp/emacs-24.5
+  when: exist_check|failed
+
+- name: make install
+  command: >
+    sudo make install
+    chdir=/tmp/emacs-24.5
+  when: exist_check|failed
