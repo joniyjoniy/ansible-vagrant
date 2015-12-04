@@ -1,0 +1,21 @@
+---
+- name: install mysql
+  apt: name={{ item }} stat=present
+  with_items:
+    - libmysql-client-dev
+    - mysql-sever
+
+- name: copy original config file
+  command cp /etc/mysql/my.cnf /etc/mysql/my.cnf.orig
+
+- name: create user
+  mysql_user:
+    name=vagrant
+    password=
+    priv=*.*:ALL
+    state=present
+
+- name: create database
+  mysql_db:
+    name=vagrant
+    state=present

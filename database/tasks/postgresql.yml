@@ -1,0 +1,29 @@
+---
+- name: install postgresql
+  with_items:
+    - libpq-dev
+    - postgresql  # 9.3.9
+    - python-psycopg2
+
+- name: restarted postgresql
+  service:
+    name=postgresql
+    state=restarted
+    enabled=yes
+
+- name: create user
+  postgresql_user:
+    name: vagrant
+    role_attr_flags: CREATEDB
+    state: present
+    login_user: postgres
+  sudo_user: postgres
+
+- name: create database
+  postgresql_db:
+    name: vagrant
+    owner: vagrant
+    ending: 'UTF-8'
+    login_user: postgres
+  sudo_user: postgres
+    

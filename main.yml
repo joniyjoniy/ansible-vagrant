@@ -4,3 +4,4 @@
   gather_facts: no
   tasks :
     - include: apt/playbook.yml
+    - include: database/playbook.yml
