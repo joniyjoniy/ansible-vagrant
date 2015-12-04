@@ -5,3 +5,4 @@
   tasks :
     - include: apt/playbook.yml
     - include: database/playbook.yml
+    - include: zsh/playbook.yml
