@@ -1,5 +1,6 @@
 ---
 - name: install postgresql
+  apt: name={{ item }} state=present
   with_items:
     - libpq-dev
     - postgresql  # 9.3.9
@@ -23,7 +24,6 @@
   postgresql_db:
     name: vagrant
     owner: vagrant
-    ending: 'UTF-8'
+    encoding: 'UTF-8'
     login_user: postgres
-  sudo_user: postgres
-    
+  sudo_user: postgres    
