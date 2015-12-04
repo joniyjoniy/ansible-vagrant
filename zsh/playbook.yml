@@ -1,7 +1,8 @@
 ---
-- shell: zsh --version | grep 5.0.8
-    register: version_check
-    ignore_errors: yes
+- shell: zsh --version
+  register: exist_check
+  ignore_errors: yes
 
-- include: tasks/install.yml
-    when: version_check|failed
+- name: install zsh
+  command: apt-get install -y zsh
+  when: exist_check|failed
