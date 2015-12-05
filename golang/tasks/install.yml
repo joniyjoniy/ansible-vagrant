@@ -1,0 +1,21 @@
+---
+- name: go dir check
+  command: test -e /usr/local/go
+  register: godir_check
+  ignore_errors: yes
+  
+- name: remove old go
+  command: rm -r /usr/local/go
+  when: godir_check|success
+
+- name: download golang 1.5.2
+  get_url: url=https://storage.googleapis.com/golang/go1.5.2.linux-amd64.tar.gz dest=/tmp/
+
+- name: unarchive golang
+  command: >
+    chdir=/tmp/
+    tar -C /usr/local -xzf go1.5.2.linux-amd64.tar.gz
+
+- name: export path
+  shell: echo export PATH=$PATH:/usr/local/go/bin >> /home/vagrant/.zshenv
+  
