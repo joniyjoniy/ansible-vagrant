@@ -11,6 +11,7 @@
 - name: source check
   shell: test -e /tmp/emacs-24.5.tar.gz
   register: source_check
+  ignore_errors: yes
 
 - name: emacs source download
   command: >
