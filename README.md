@@ -2,34 +2,14 @@
 
 ## About
 
-vagrantのセットアップ用のansible-playbook  
+vagrantセットアップ用のansible-playbook  
 goはgo言語開発環境  
 railsはrails開発環境(まだできてない)
 
 ## Installation
-- リポジトリとvagrantのセット
+- リポジトリのセット
 ```
-$ mkdir test
-$ cd test
-$ git clone https://github.com/gembaf/ansible-vagrant.git
-$ vagrant init ubuntu/trusty64
-```
-
-- Vagrantfileへの追記
-```
-Vagrant.configure(2) do |config|
-
-  ……
-
-  config.vm.provision "ansible" do |ansible|
-    ansible.playbook = "ansible-vagrant/main.yml"
-  end
-end
-```
-
-- vagrantの起動
-```
-$ vagrant up --provider virtualbox
+$ git clone https://github.com/joniyjoniy/ansible-vagrant.git
 ```
 
 ## Requirements
