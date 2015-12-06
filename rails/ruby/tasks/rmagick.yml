@@ -1,0 +1,10 @@
+---
+- name: install dependent packages
+  apt: name={{ item }} state=present
+  with_items:
+    - imagemagick
+    - libmagickwand-dev
+
+- name: install rmagick
+  command: gem install rmagick --no-ri --no-rdoc
+                    
