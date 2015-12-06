@@ -2,8 +2,8 @@
 
 ## About
 
-vagrantのセットアップ用のansible-playbook
-goはgo言語開発環境
+vagrantのセットアップ用のansible-playbook  
+goはgo言語開発環境  
 railsはrails開発環境(まだできてない)
 
 ## Installation
