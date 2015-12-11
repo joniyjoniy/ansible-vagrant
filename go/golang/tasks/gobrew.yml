@@ -1,0 +1,24 @@
+---
+- shell: bash -lc 'gobrew --version' | grep 0.0.5
+  register: version_check
+  ignore_errors: yes
+
+- name: install gobrew
+  git: >
+    repo=https://github.com/cryptojuice/gobrew.git
+    dest=/usr/local/gobrew
+    version=0.0.5
+  when: version_check|failed
+
+- name: export path
+  shell:
+    echo 'export PATH=/usr/local/gobrew/bin:$PATH' >> /etc/profile.d/gobrew.sh
+    && echo 'eval "$(gobrew init -)"' >> /etc/profile.d/gobrew.sh
+    && bash /etc/profile.d/gobrew.sh
+  when: version_check|failed
+  
+- name: setup gobrew
+  command:
+    bash -lc 'gobrew install 1.5.2'
+    && bash -lc 'gobrew global 1.5.2'
+  when: version_check|failed

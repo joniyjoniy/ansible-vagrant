@@ -12,7 +12,7 @@
 
 - name: compile & install
   shell:
-    chdir=/usr/local/src/vim
+    chdir=/usr/local/src/vim/src
     ./configure --disable-gui
       && make
       && make install

@@ -8,8 +8,16 @@
   command: rm -r /usr/local/go
   when: godir_check|success
 
+- name: golang 1.5.2 dir check
+  command: test -e /tmp/go1.5.2.linux-amd64.tar.gz
+  register: golang_version_check
+  ignore_errors: yes
+
 - name: download golang 1.5.2
-  get_url: url=https://storage.googleapis.com/golang/go1.5.2.linux-amd64.tar.gz dest=/tmp/
+  get_url: >
+    url=https://storage.googleapis.com/golang/go1.5.2.linux-amd64.tar.gz
+    dest=/tmp/
+  when: golang_version_check|failed
 
 - name: unarchive golang
   command: >
@@ -17,5 +25,7 @@
     tar -C /usr/local -xzf go1.5.2.linux-amd64.tar.gz
 
 - name: export path
-  shell: echo export PATH=$PATH:/usr/local/go/bin >> /home/vagrant/.zshenv
-  
+  shell: >
+    echo 'export PATH=$PATH:/usr/local/go/bin' > /etc/profile.d/golang.sh
+    && bash /etc/profile.d/golang.sh
+

@@ -8,4 +8,6 @@
     - include: database/playbook.yml
     - include: zsh/playbook.yml
     - include: emacs/playbook.yml
+    - include: vim/playbook.yml
     - include: golang/playbook.yml
+

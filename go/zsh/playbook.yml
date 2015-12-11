@@ -4,5 +4,8 @@
   ignore_errors: yes
 
 - name: install zsh
-  command: apt-get install -y zsh
+  apt : name={{ item }} state=present
+  with_items:
+    - ncurses
+    - zsh
   when: exist_check|failed
