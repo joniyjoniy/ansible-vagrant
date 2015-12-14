@@ -4,7 +4,7 @@
 
 vagrantセットアップ用のansible-playbook  
 goはgo言語開発環境  
-railsはrails開発環境(まだできてない)
+railsはrails開発環境
 
 ## Installation
 - リポジトリのセット
