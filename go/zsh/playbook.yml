@@ -6,6 +6,5 @@
 - name: install zsh
   apt : name={{ item }} state=present
   with_items:
-    - ncurses
     - zsh
   when: exist_check|failed
