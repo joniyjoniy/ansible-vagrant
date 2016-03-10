@@ -1,24 +1,38 @@
 # ansible-vagrant
 
 ## About
-rails開発環境構築用playbook  
+Ubuntu開発環境構築用playbook  
+  
+Windows環境でもprovisionできるようにGuest側でAnsibleを実行します。  
+Rails開発環境とGo開発環境があります。
 
 ## Installation
-- リポジトリとvagrantのセット
+- リポジトリとVagrantのセット
 ```
 $ git clone https://github.com/joniyjoniy/ansible-vagrant.git
-$ cd rails
+$ cd ansible-vagrant
 ```
 
-- vagrantの起動
+#### Vagrantfile修正
+
+- 構築環境の選択  
+デフォルトはRails開発環境を構築します。  
+Goの場合は`settings/provision.sh`の  
+`environment="rails"`を`environment="go"`に変更してください。  
+
+- バージョンの指定  
+`library/vars/`に各言語のバージョンを指定しているので、  
+使用するバージョンに変更してください。  
+
+- Vagrantの起動
 ```
 $ vagrant up
 ```
 
 ## Requirements
-- vagrant
+- Vagrant
 - VirtualBox
-- ansible
+- Ansible
 
 ## Reference
 https://github.com/gembaf/ansible-vagrant

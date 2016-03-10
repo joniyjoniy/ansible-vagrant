@@ -15,4 +15,3 @@
   with_items:
     - g++
     - git
-    - ansible
