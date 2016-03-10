@@ -1,15 +1,18 @@
 # ansible-vagrant
 
 ## About
-
-vagrantセットアップ用のansible-playbook  
-goはgo言語開発環境  
-railsはrails開発環境
+rails開発環境構築用playbook  
 
 ## Installation
-- リポジトリのセット
+- リポジトリとvagrantのセット
 ```
 $ git clone https://github.com/joniyjoniy/ansible-vagrant.git
+$ cd rails
+```
+
+- vagrantの起動
+```
+$ vagrant up
 ```
 
 ## Requirements

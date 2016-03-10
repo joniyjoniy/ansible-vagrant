@@ -4,4 +4,5 @@ if ! [ `which ansible` ]; then
     apt-get install -y ansible
 fi
 
-ansible-playbook -i /vagrant/hosts /vagrant/main.yml
+environment="rails"
+ansible-playbook -i /vagrant/settings/hosts /vagrant/roles/$environment.yml

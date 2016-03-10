@@ -19,6 +19,6 @@
   
 - name: setup gobrew
   command:
-    bash -lc 'gobrew install 1.5.2'
-    && bash -lc 'gobrew global 1.5.2'
+    bash -lc 'gobrew install 1.6'
+    && bash -lc 'gobrew global 1.6'
   when: version_check|failed

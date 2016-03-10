@@ -8,21 +8,21 @@
   command: rm -r /usr/local/go
   when: godir_check|success
 
-- name: golang 1.5.2 dir check
-  command: test -e /tmp/go1.5.2.linux-amd64.tar.gz
+- name: golang {{ golang_version }} dir check
+  command: test -e /tmp/go{{ golang_version }}.linux-amd64.tar.gz
   register: golang_version_check
   ignore_errors: yes
 
-- name: download golang 1.5.2
+- name: download golang {{ golang_version }}
   get_url: >
-    url=https://storage.googleapis.com/golang/go1.5.2.linux-amd64.tar.gz
+    url=https://storage.googleapis.com/golang/go{{ golang_version }}.linux-amd64.tar.gz
     dest=/tmp/
   when: golang_version_check|failed
 
 - name: unarchive golang
   command: >
     chdir=/tmp/
-    tar -C /usr/local -xzf go1.5.2.linux-amd64.tar.gz
+    tar -C /usr/local -xzf go{{ golang_version }}.linux-amd64.tar.gz
 
 - name: export path
   shell: >

@@ -17,7 +17,7 @@
 - name: git clone
   git: repo=https://github.com/ruby/ruby.git
     dest=/usr/local/src/ruby
-    version=v2_2_3
+    version={{ ruby_git_version }}
   when: exist_check|failed
 
 - name: compile & install

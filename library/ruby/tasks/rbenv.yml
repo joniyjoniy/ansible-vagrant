@@ -9,13 +9,17 @@
     dest=/usr/local/rbenv
     version=v0.4.0
   when: version_check|failed
-      
+
+- shell: test -e /usr/local/rbenv/plugins/ruby-build
+  register: ruby_build_check
+  ignore_errors: yes
+  
 - name: install ruby-build
   git:
     repo="https://github.com/sstephenson/ruby-build.git"
     dest=/usr/local/rbenv/plugins/ruby-build
     version=v20150818
-  when: version_check|failed
+  when: ruby_build_check|failed
 
 - name: create directory
   file: path=/usr/local/rbenv/{{ item }} state=directory
@@ -32,10 +36,14 @@
     && bash /etc/profile.d/rbenv.sh
   when: version_check|failed
 
+- shell: ruby --version | grep {{ ruby_version }}
+  register: ruby_check
+  ignore_errors: yes
+
 - name: setup rbenv
   command:
-    bash -lc 'CONFIGURE_OPTS='--disable-install-rdoc' rbenv install 2.2.2'
-    && bash -lc 'rbenv global 2.2.2'
+    bash -lc 'CONFIGURE_OPTS='--disable-install-rdoc' rbenv install {{ ruby_version }}'
+    && bash -lc 'rbenv global {{ ruby_version }}'
     && bash -lc 'exec gem install bundler'
     && bash -lc 'rbenv rehash'
-  when: version_check|failed
+  when: ruby_check|failed

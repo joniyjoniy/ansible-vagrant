@@ -1,0 +1,13 @@
+---
+- hosts: all
+  sudo: yes
+  gather_facts: no
+
+  tasks :
+    - include: ../library/apt/playbook.yml
+    - include: ../library/database/playbook.yml
+    - include: ../library/zsh/playbook.yml
+    - include: ../library/emacs/playbook.yml
+    - include: ../library/vim/playbook.yml
+    - include: ../library/golang/playbook.yml
+
