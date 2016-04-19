@@ -4,10 +4,9 @@
   gather_facts: no
 
   tasks :
-    - include: ../library/apt/playbook.yml
-    - include: ../library/database/playbook.yml
-    - include: ../library/zsh/playbook.yml
-    - include: ../library/emacs/playbook.yml
-    - include: ../library/vim/playbook.yml
-    - include: ../library/golang/playbook.yml
-
+    - include: ../libraries/apt/playbook.yml
+    - include: ../libraries/database/playbook.yml
+    - include: ../libraries/zsh/playbook.yml
+    - include: ../libraries/emacs/playbook.yml
+    - include: ../libraries/vim/playbook.yml
+    - include: ../libraries/golang/playbook.yml
