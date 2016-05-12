@@ -1,0 +1,24 @@
+---
+- name: node version check
+  shell: node -v | grep {{ node_version }}
+  register: version_check
+  ignore_errors: yes
+
+- name: node npm install
+  apt: name= {{ item }} state=present
+  with_items:
+    - nodejs
+    - npm
+  when: version_check|failed
+
+- name: cache clean
+  shell: npm cache clean
+  when: version_check|failed
+
+- name: n install
+  shell: npm install n -g && n stable
+  when: version_check|failed
+
+- name: old package purge
+  shell: apt-get purge -y nodejs npm
+  when: version_check|failed
