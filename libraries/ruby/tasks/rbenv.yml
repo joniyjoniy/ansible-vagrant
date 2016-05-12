@@ -33,17 +33,18 @@
     echo 'export RBENV_ROOT=/usr/local/rbenv' > /etc/profile.d/rbenv.sh
     && echo 'export PATH=$RBENV_ROOT/bin:$PATH' >> /etc/profile.d/rbenv.sh
     && echo 'eval "$(rbenv init -)"' >> /etc/profile.d/rbenv.sh
+    && chmod +x /etc/profile.d/rbenv.sh
     && bash /etc/profile.d/rbenv.sh
   when: version_check|failed
 
-- shell: ruby --version | grep {{ ruby_version }}
-  register: ruby_check
-  ignore_errors: yes
+# - shell: ruby --version | grep {{ ruby_version }}
+#   register: ruby_check
+#   ignore_errors: yes
 
-- name: setup rbenv
-  command:
-    bash -lc 'CONFIGURE_OPTS='--disable-install-rdoc' rbenv install {{ ruby_version }}'
-    && bash -lc 'rbenv global {{ ruby_version }}'
-    && bash -lc 'exec gem install bundler'
-    && bash -lc 'rbenv rehash'
-  when: ruby_check|failed
+# - name: setup rbenv
+#   command:
+#     bash -lc 'CONFIGURE_OPTS='--disable-install-rdoc' rbenv install {{ ruby_version }}'
+#     && bash -lc 'rbenv global {{ ruby_version }}'
+#     && bash -lc 'exec gem install bundler'
+#     && bash -lc 'rbenv rehash'
+#   when: ruby_check|failed
