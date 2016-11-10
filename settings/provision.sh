@@ -5,4 +5,4 @@ if ! [ `which ansible` ]; then
 fi
 
 environment="rails"
-ansible-playbook -i /vagrant/settings/hosts /vagrant/roles/$environment.yml
+ansible-playbook -i /vagrant/settings/hosts /vagrant/playbook/$environment.yml

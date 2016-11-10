@@ -1,0 +1,15 @@
+---
+# - name: include vars
+#   include_vars: ruby.yml
+
+- shell: ruby --version | grep {{ ruby_version }}
+  register: version_check
+  ignore_errors: yes
+
+- include: install.yml
+  when: version_check|failed
+
+- include: rbenv.yml
+- include: gem.yml
+- include: phantomjs.yml
+- include: rmagick.yml
